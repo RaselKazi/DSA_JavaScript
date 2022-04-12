@@ -5,7 +5,7 @@
 
 export function kadaneAlgo(array) {
   let cumulativeSum = 0;
-  let maxSum = Number.NEGATIVE_INFINITY; // maxSum has the least possible value
+  let maxSum = 0; // maxSum has the least possible value
   for (let i = 0; i < array.length; i++) {
     cumulativeSum = cumulativeSum + array[i];
     if (maxSum < cumulativeSum) {

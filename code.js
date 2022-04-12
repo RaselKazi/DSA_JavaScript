@@ -1,29 +1,67 @@
-const sieveOfEratosthenes = (n) => {
-  /*
-   * Calculates prime numbers till a number n
-   * :param n: Number up to which to calculate primes
-   * :return: A boolean list containing only primes
-   */
-  const primes = new Array(n + 1);
-  primes.fill(true); // set all as true initially
-  primes[0] = primes[1] = false; // Handling case for 0 and 1
-  const sqrtn = Math.ceil(Math.sqrt(n));
-  for (let i = 2; i <= sqrtn; i++) {
-    if (primes[i]) {
-      for (let j = i * i; j <= n; j += i) {
-        /*
-        Optimization.
-        Let j start from i * i, not 2 * i, because smaller multiples of i have been marked false.
-        For example, let i = 4.
-        We do not have to check from 8(4 * 2) to 12(4 * 3)
-        because they have been already marked false when i=2 and i=3.
-        */
-        primes[j] = false;
+function createGraph(V, E) {
+  // V - Number of vertices in graph
+  // E - Number of edges in graph (u,v,w)
+  const adjList = []; // Adjacency list
+  for (let i = 0; i < V; i++) {
+    adjList.push([]);
+  }
+  for (let i = 0; i < E.length; i++) {
+    adjList[E[i][0]].push([E[i][1], E[i][2]]);
+    adjList[E[i][1]].push([E[i][0], E[i][2]]);
+  }
+  return adjList;
+}
+
+function djikstra(graph, V, src) {
+  const vis = Array(V).fill(0);
+  const dist = [];
+  for (let i = 0; i < V; i++) dist.push([10000, -1]);
+  dist[src][0] = 0;
+
+  for (let i = 0; i < V - 1; i++) {
+    let mn = -1;
+    for (let j = 0; j < V; j++) {
+      if (vis[j] === 0) {
+        if (mn === -1 || dist[j][0] < dist[mn][0]) mn = j;
+      }
+    }
+
+    vis[mn] = 1;
+    for (let j = 0; j < graph[mn].length; j++) {
+      const edge = graph[mn][j];
+      if (vis[edge[0]] === 0 && dist[edge[0]][0] > dist[mn][0] + edge[1]) {
+        dist[edge[0]][0] = dist[mn][0] + edge[1];
+        dist[edge[0]][1] = mn;
       }
     }
   }
-  return primes;
-};
 
-// let ar = [1, 9, 6, 4, 5, 3, 7, 8, 2];
-console.log(sieveOfEratosthenes(12));
+  return dist;
+}
+
+const V = 9;
+const E = [
+  [0, 1, 4],
+  [0, 7, 8],
+  [1, 7, 11],
+  [1, 2, 8],
+  [7, 8, 7],
+  [6, 7, 1],
+  [2, 8, 2],
+  [6, 8, 6],
+  [5, 6, 2],
+  [2, 5, 4],
+  [2, 3, 7],
+  [3, 5, 14],
+  [3, 4, 9],
+  [4, 5, 10],
+];
+
+const graph = createGraph(V, E);
+const distances = djikstra(graph, V, 0);
+
+/**
+ * The first value in the array determines the minimum distance and the
+ * second value represents the parent node from which the minimum distance has been calculated
+ */
+console.log(graph);

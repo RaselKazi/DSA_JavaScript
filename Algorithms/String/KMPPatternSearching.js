@@ -20,11 +20,6 @@ const computeLPS = (pattern) => {
   return lps;
 };
 
-/**
- * Returns all indices where pattern starts in text
- * @param {*} text a big text in which pattern string is to find
- * @param {*} pattern the string to find
- */
 const KMPSearch = (text, pattern) => {
   if (!pattern || !text) {
     return []; // no results

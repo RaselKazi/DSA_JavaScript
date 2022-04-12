@@ -40,5 +40,3 @@ function BellmanFord(graph, V, E, src, dest) {
     if (i === dest) return dis[i];
   }
 }
-
-export { BellmanFord };

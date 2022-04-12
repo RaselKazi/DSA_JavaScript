@@ -47,30 +47,14 @@ function djikstra(graph, V, src) {
   return dist;
 }
 
-export { createGraph, djikstra };
-
-// const V = 9
-// const E = [
-//   [0, 1, 4],
-//   [0, 7, 8],
-//   [1, 7, 11],
-//   [1, 2, 8],
-//   [7, 8, 7],
-//   [6, 7, 1],
-//   [2, 8, 2],
-//   [6, 8, 6],
-//   [5, 6, 2],
-//   [2, 5, 4],
-//   [2, 3, 7],
-//   [3, 5, 14],
-//   [3, 4, 9],
-//   [4, 5, 10]
-// ]
-
-// const graph = createGraph(V, E)
-// const distances = djikstra(graph, V, 0)
-
-/**
- * The first value in the array determines the minimum distance and the
- * second value represents the parent node from which the minimum distance has been calculated
- */
+// Test
+const graph = createGraph(6, [
+  [0, 1, 1],
+  [0, 2, 5],
+  [1, 2, 1],
+  [1, 3, 2],
+  [2, 3, 1],
+  [2, 4, 2],
+  [3, 4, 3],
+  [4, 5, 1],
+]);

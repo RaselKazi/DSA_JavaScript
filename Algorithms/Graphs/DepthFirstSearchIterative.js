@@ -1,4 +1,4 @@
-class GraphUnweightedUndirected {
+class GraphUndirected {
   // Unweighted Undirected Graph class
   constructor() {
     this.connections = {};
@@ -44,11 +44,8 @@ class GraphUnweightedUndirected {
   }
 }
 
-export { GraphUnweightedUndirected };
-
 // Example
 
-// const graph = new GraphUnweightedUndirected()
 // graph.addEdge(1, 2)
 // graph.addEdge(2, 3)
 // graph.addEdge(2, 4)
